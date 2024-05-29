@@ -4,12 +4,12 @@ import styles from "./CreateHabit.module.css";
 
 const CreateHabit = () => {
     return (
-        <FixedLayout className={styles.wrapper} vertical='top'>
+        <section className={styles.wrapper}>
             <List>
                 <Input className={styles.input} placeholder="I am usual input, just leave me alone" />
                 <Input className={styles.input} placeholder="I am usual input, just leave me alone" />
             </List>
-        </FixedLayout>
+        </section>
     );
 };
 

@@ -3,13 +3,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     padding: 12px 24px;
 }
 
-div {
+div:has(.input) {
     background: #ffffff !important;
     color: #000 !important;
-    .input {
-        background: #ffffff !important;
-    }
+    width: 100%;
+    padding: 0;
+}
+
+div:has(.input) .input {
+    background: #ffffff !important;
+    color: #000 !important;
+}
+
+div:has(.input) .input input {
+    color: #000 !important;
 }
