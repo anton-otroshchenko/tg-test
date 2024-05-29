@@ -91,6 +91,7 @@ div:has(>.input){
 .daysWrapper {
     display: flex;
     gap: 17px;
+    padding: 0 !important;
 }
 
 .day {
