@@ -62,7 +62,7 @@ const CreateHabit = () => {
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DesktopTimePicker
                             value={new Date()}
-                            ampm={false}
+                            ampm
                             views={['hours', 'minutes']}
                         />
                     </LocalizationProvider>
