@@ -62,15 +62,15 @@ div:has(>.input){
     background: #ffffff !important;
     border-radius: 16px;
     padding: 2px;
+}
 
-    div {
-        padding: 0 !important;
+.activeTab > div {
+    padding: 0 !important;
+}
 
-        span{
-            text-align: center !important;
-            width: 100%;
-        }
-    }
+.activeTab > div > span{
+    text-align: center !important;
+    width: 100%;
 }
 
 .activeTab > span {
