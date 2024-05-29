@@ -68,9 +68,10 @@ div:has(>.input){
     padding: 0 !important;
 }
 
-.activeTab > div > span{
+.activeTab > div span{
     text-align: center !important;
     width: 100%;
+    background: red !important;
 }
 
 .activeTab > span {
