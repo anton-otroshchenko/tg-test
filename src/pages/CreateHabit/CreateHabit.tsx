@@ -57,7 +57,7 @@ const CreateHabit = () => {
                </List>
                 <List className={styles.remindersWrapper}>
                     <Title className={styles.title}>Reminders</Title>
-                    <input aria-label="Time" type="time"/>
+                    <input className={styles.timeInput} aria-label="Time" type="time"/>
                 </List>
             </List>
         </FixedLayout>

@@ -118,3 +118,17 @@ div:has(>.input){
 .frequency, .remindersWrapper {
     padding: 16px 16px 0 !important;
 }
+
+.timeInput {
+    font-size: 16px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: red;
+    padding: 8px;
+    outline: none;
+    -webkit-appearance: none; /* Remove default styling in WebKit browsers */
+    -moz-appearance: none; /* Remove default styling in Mozilla browsers */
+    appearance: none; /* Remove default styling in all browsers */
+}
