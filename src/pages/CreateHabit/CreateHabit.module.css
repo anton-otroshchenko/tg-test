@@ -48,7 +48,7 @@ div:has(>.input){
         background: inherit !important;
         padding: 0 !important;
 
-        h6 > span{
+        span{
             text-align: center;
             width: 100%;
         }
@@ -64,7 +64,7 @@ div:has(>.input){
     div {
         padding: 0 !important;
 
-        h6 > span{
+        span{
             text-align: center;
             width: 100%;
         }
