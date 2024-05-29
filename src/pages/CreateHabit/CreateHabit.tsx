@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, FixedLayout, List, Title} from "@xelene/tgui";
+import {Input, FixedLayout, List} from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 
 const CreateHabit = () => {

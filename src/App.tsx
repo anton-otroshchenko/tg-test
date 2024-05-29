@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react';
-import {createBrowserRouter, RouterProvider, Route, Routes, BrowserRouter} from 'react-router-dom';
+import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import { AppRoot } from '@xelene/tgui';
 import { Habits } from "./pages/Habits/Habits";
 import {CreateHabit} from "./pages/CreateHabit/CreateHabit";
 
 // Debug Component
-const Debug = () => <div>Debug Route</div>;
-
 const App = () => {
   window.Telegram?.WebApp.expand();
 
