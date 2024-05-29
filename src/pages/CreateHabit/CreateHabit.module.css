@@ -43,8 +43,15 @@ div:has(>.input){
 .tab {
     width: 50%;
     color: #C2C4CA !important;
-    .div {
-        background: inherit;
+    text-align: center;
+    div {
+        background: inherit !important;
+        padding: 0 !important;
+
+        h6 > span{
+            text-align: center;
+            width: 100%;
+        }
     }
 }
 
@@ -53,6 +60,15 @@ div:has(>.input){
     background: #ffffff !important;
     border-radius: 16px;
     padding: 2px;
+
+    div {
+        padding: 0 !important;
+
+        h6 > span{
+            text-align: center;
+            width: 100%;
+        }
+    }
 }
 
 .activeTab > span {
