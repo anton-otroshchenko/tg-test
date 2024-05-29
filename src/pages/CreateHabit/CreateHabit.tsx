@@ -7,7 +7,7 @@ const CreateHabit = () => {
         <FixedLayout className={styles.wrapper}>
             <List>
                 <Input className={styles.input} placeholder="Title" />
-                <Input className={styles.input} placeholder="description" />
+                <Input className={styles.input} placeholder="Description (optional)" />
             </List>
         </FixedLayout>
     );
