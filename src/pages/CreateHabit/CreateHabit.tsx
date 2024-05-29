@@ -60,7 +60,11 @@ const CreateHabit = () => {
                 <List className={styles.remindersWrapper}>
                     <Title className={styles.title}>Reminders</Title>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DesktopTimePicker/>
+                        <DesktopTimePicker
+                            value={new Date()}
+                            ampm={false}
+                            views={['hours', 'minutes']}
+                        />
                     </LocalizationProvider>
                 </List>
             </List>
