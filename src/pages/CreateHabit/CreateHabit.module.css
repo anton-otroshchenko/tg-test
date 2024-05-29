@@ -46,15 +46,16 @@ div:has(>.input){
     width: 50%;
     color: #C2C4CA !important;
     text-align: center;
-    div {
-        background: inherit !important;
-        padding: 0 !important;
+}
 
-        span{
-            text-align: center;
-            width: 100%;
-        }
-    }
+.tab div {
+    background: inherit !important;
+    padding: 0 !important;
+}
+
+.tab > div span {
+    text-align: center;
+    width: 100%;
 }
 
 .activeTab {
@@ -64,17 +65,16 @@ div:has(>.input){
     padding: 2px;
 }
 
-.activeTab > div {
+.activeTab div {
     padding: 0 !important;
 }
 
 .activeTab > div span{
     text-align: center !important;
     width: 100%;
-    background: red !important;
 }
 
-.activeTab > span {
+.activeTab span {
     color: #000000 !important;
     font-weight: 400;
     font-size: 14px;
@@ -102,12 +102,12 @@ div:has(>.input){
     height: 34px;
     border-radius: 50%;
     padding: 0 !important;
+}
 
-    span {
-        text-align: center !important;
-        width: 100%;
-        font-size: 14px;
-    }
+.day span {
+    text-align: center !important;
+    width: 100%;
+    font-size: 14px;
 }
 
 .activeDay {
