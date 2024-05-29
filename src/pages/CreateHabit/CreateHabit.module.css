@@ -29,8 +29,8 @@ div:has(>.input){
     margin-top: 10px;
     width: 100%;
     min-height: 32px;
-    color: #000000;
-    background: #F0F1FB;
+    color: #000000 !important;
+    background: #F0F1FB !important;
     border-radius: 16px;
     padding: 1px;
 
@@ -42,7 +42,7 @@ div:has(>.input){
 
 .tab {
     width: 50%;
-    color: #C2C4CA;
+    color: #C2C4CA !important;
     .div {
         background: inherit;
     }
@@ -50,13 +50,12 @@ div:has(>.input){
 
 .activeTab {
     width: 50%;
-    background: #ffffff;
+    background: #ffffff !important;
     border-radius: 16px;
     padding: 2px;
 }
 
 .activeTab > span {
-    background: #007bff;
     color: #000000 !important;
     font-weight: 400;
     font-size: 14px;
