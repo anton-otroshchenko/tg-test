@@ -35,11 +35,11 @@ div:has(>.input){
     background: #F0F1FB !important;
     border-radius: 16px;
     padding: 1px;
+}
 
-    label {
-        margin-bottom: 0 !important;
-        padding: 0 !important;
-    }
+.radioWrapper label {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
 }
 
 .tab {
