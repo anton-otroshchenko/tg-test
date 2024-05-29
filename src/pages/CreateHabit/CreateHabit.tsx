@@ -4,14 +4,15 @@ import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+const allActiveDays = [true, true, true, true, true, true, true];
 
 const CreateHabit = () => {
     const [selectedRadio, setSelectedRadio] = useState(1);
-    const [activeDays, setActiveDays] = useState([true, true, true, true, true, true, true]);
+    const [activeDays, setActiveDays] = useState(allActiveDays);
 
     const handleSelectAllDays = () => {
         setSelectedRadio(1);
-        setActiveDays([true, true, true, true, true, true, true]);
+        setActiveDays(allActiveDays);
     };
 
     const handleToggleActiveDay = (index: number) => {
@@ -26,8 +27,8 @@ const CreateHabit = () => {
             <List>
                 <Input className={styles.input} placeholder="Title" />
                 <Input className={styles.input} placeholder="Description (optional)" />
-                <Title className={styles.title}>Frequency</Title>
                <List className={styles.frequency}>
+                   <Title className={styles.title}>Frequency</Title>
                    <List className={styles.radioWrapper}>
                        <Cell
                            Component="label"
@@ -54,6 +55,10 @@ const CreateHabit = () => {
                        </List>
                    }
                </List>
+                <List className={styles.remindersWrapper}>
+                    <Title className={styles.title}>Reminders</Title>
+                    <input aria-label="Time" type="time"/>
+                </List>
             </List>
         </FixedLayout>
     );
