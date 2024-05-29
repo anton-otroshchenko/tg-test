@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 0;
+    padding: 0 12px;
     position: relative;
     top: 4px;
     left: 0;
@@ -22,4 +22,42 @@ div:has(>.input){
 
 .input input {
     color: #000 !important;
+}
+
+.radioWrapper {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    min-height: 32px;
+    color: #000000;
+    background: #F0F1FB;
+    border-radius: 16px;
+    padding: 1px;
+
+    label {
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+.tab {
+    width: 50%;
+    color: #C2C4CA;
+    .div {
+        background: inherit;
+    }
+}
+
+.activeTab {
+    width: 50%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2px;
+}
+
+.activeTab > span {
+    background: #007bff;
+    color: #000000 !important;
+    font-weight: 400;
+    font-size: 14px;
 }
