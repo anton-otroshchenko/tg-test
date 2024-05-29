@@ -10,6 +10,6 @@ div {
     background: #ffffff !important;
     color: #000 !important;
     .input {
-        background: #ffffff;
+        background: #ffffff !important;
     }
 }
