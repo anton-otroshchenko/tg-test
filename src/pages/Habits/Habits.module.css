@@ -1,0 +1,30 @@
+.habits {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 280px 55px 0;
+    gap: 16px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    background: transparent;
+
+    div {
+        margin-left: 10px;
+    }
+}
+
+.button:after, button span, .button {
+    border-radius: 25%;
+    width: 53px;
+    height: 45px;
+}
+
+.button:hover:after {
+    opacity: 0;
+}
