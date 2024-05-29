@@ -1,24 +1,25 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 12px 24px;
+    height: 100%;
+    padding: 0 24px;
+    position: relative;
+    top: 24px;
+    left: 0;
 }
 
-div:has(.input) {
+div:has(>.input){
     background: #ffffff !important;
     color: #000 !important;
-    width: 100%;
-    padding: 0;
+    width: 100% !important;
+    padding: 0 !important;
 }
 
-div:has(.input) .input {
+.input {
     background: #ffffff !important;
     color: #000 !important;
 }
 
-div:has(.input) .input input {
+.input input {
     color: #000 !important;
 }
