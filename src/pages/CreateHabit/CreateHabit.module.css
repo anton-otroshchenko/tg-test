@@ -6,6 +6,7 @@
     position: relative;
     top: 4px;
     left: 0;
+    background: #ffffff;
 }
 
 div:has(>.input){
@@ -75,4 +76,43 @@ div:has(>.input){
     color: #000000 !important;
     font-weight: 400;
     font-size: 14px;
+}
+
+.title {
+    color: #000000 !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 8px !important;
+}
+
+.daysWrapper {
+    display: flex;
+    gap: 17px;
+}
+
+.day {
+    background: #F0F1FB;
+    color: #C2C4CA !important;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    padding: 0 !important;
+
+    span {
+        text-align: center;
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+.activeDay {
+    background: #111827;
+    color: #ffffff;
+}
+
+.frequency {
+    margin: 16px;
 }
