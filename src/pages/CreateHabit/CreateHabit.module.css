@@ -67,7 +67,7 @@ div:has(>.input){
         padding: 0 !important;
 
         span{
-            text-align: center;
+            text-align: center !important;
             width: 100%;
         }
     }
@@ -103,7 +103,7 @@ div:has(>.input){
     padding: 0 !important;
 
     span {
-        text-align: center;
+        text-align: center !important;
         width: 100%;
         font-size: 14px;
     }
