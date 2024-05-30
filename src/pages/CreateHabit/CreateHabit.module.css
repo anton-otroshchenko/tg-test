@@ -19,6 +19,20 @@ div:has(>.input){
     padding: 8px 0 !important;
 }
 
+div:has(>.input) label{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-shadow: none !important;
+}
+
+div:has(>.input) input {
+    border-bottom: 1px solid #C2C4CA !important;
+}
+
+div:has(>.input) input:focus {
+    border-bottom: 1px solid #000000 !important;
+}
+
 .input {
     background: #ffffff !important;
     color: #000 !important;
