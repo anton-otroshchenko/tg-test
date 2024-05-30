@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Input, FixedLayout, List, Cell, Title, Button} from "@xelene/tgui";
+import {Input, FixedLayout, List, Cell, Title, Button, Text} from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 import {
@@ -9,6 +9,7 @@ import {
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 import { ReactComponent as NotificationIcon } from '../../assets/img/notification.svg'
+import { ReactComponent as CheckIcon } from '../../assets/img/check.svg'
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 const allActiveDays = [true, true, true, true, true, true, true];
@@ -18,6 +19,7 @@ const CreateHabit = () => {
     const [selectedRadio, setSelectedRadio] = useState(1);
     const [activeDays, setActiveDays] = useState(allActiveDays);
     const [isReminderDaysPickerOpened, setIsReminderDaysPickerOpened] = useState(false);
+    const [reminderDaysPicked, setReminderDaysPicked] = useState([true,true,true,true,true,true,true]);
 
     const handleSelectAllDays = () => {
         setSelectedRadio(1);
@@ -39,13 +41,25 @@ const CreateHabit = () => {
         setIsReminderDaysPickerOpened(false);
     }
 
+    const handleReminderDayPick = (index: number) => {
+        const newReminderDaysPicker = reminderDaysPicked.map((isActive, i) =>
+            i === index ? !isActive : isActive
+        );
+        setReminderDaysPicked(newReminderDaysPicker);
+    }
+
     if(isReminderDaysPickerOpened){
         return (
             <FixedLayout className={clsx(styles.wrapper, styles.daysPicker)}>
                 <List className={styles.reminderDays}>
                     {
-                        reminderDaysOptions.map((option) => (
-                            <Cell key={option}>{option}</Cell>
+                        reminderDaysOptions.map((option, index) => (
+                            <Cell onClick={()=>handleReminderDayPick(index)} className={styles.reminderDay} key={option}>
+                                <Text>{option}</Text>
+                                {reminderDaysPicked[index]&&
+                                    <CheckIcon/>
+                                }
+                            </Cell>
                         ))
                     }
                 </List>
