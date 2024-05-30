@@ -12,10 +12,12 @@ import { ReactComponent as NotificationIcon } from '../../assets/img/notificatio
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 const allActiveDays = [true, true, true, true, true, true, true];
+const reminderDaysOptions= ['Every Monday', 'Every Tuesday', 'Every Wednesday', 'Every Thursday', 'Every Friday', 'Every Saturday', 'Every Sunday'];
 
 const CreateHabit = () => {
     const [selectedRadio, setSelectedRadio] = useState(1);
     const [activeDays, setActiveDays] = useState(allActiveDays);
+    const [isReminderDaysPickerOpened, setIsReminderDaysPickerOpened] = useState(false);
 
     const handleSelectAllDays = () => {
         setSelectedRadio(1);
@@ -28,6 +30,31 @@ const CreateHabit = () => {
         );
         setActiveDays(newActiveDays);
     };
+
+    const handleReminderDaysPickerOpen = () => {
+        setIsReminderDaysPickerOpened(true);
+    }
+
+    const handleReminderDaysPickerClose = () => {
+        setIsReminderDaysPickerOpened(false);
+    }
+
+    if(isReminderDaysPickerOpened){
+        return (
+            <FixedLayout className={clsx(styles.wrapper, styles.daysPicker)}>
+                <List className={styles.reminderDays}>
+                    {
+                        reminderDaysOptions.map((option, index) => (
+                            <Cell key={option}>{option}</Cell>
+                        ))
+                    }
+                </List>
+                <Button className={styles.saveButton} onClick={handleReminderDaysPickerClose}>
+                    Save
+                </Button>
+            </FixedLayout>
+        )
+    }
 
     return (
         <FixedLayout className={styles.wrapper}>
@@ -72,7 +99,7 @@ const CreateHabit = () => {
                                 views={['hours', 'minutes']}
                             />
                         </LocalizationProvider>
-                        <Button className={styles.button} before={<NotificationIcon/>}>
+                        <Button onClick={()=>handleReminderDaysPickerOpen()} className={styles.button} before={<NotificationIcon/>}>
                             Every day
                         </Button>
                     </List>

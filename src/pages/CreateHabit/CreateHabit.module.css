@@ -176,8 +176,18 @@ div:has(>.input){
 
 .reminders div {
     margin-bottom: 0 !important;
+    padding-right: 0;
 }
 
 .button:hover:after {
     opacity: 0 !important;
+}
+
+.daysPicker{
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+.reminderDays {
+    color: #000000 !important;
 }
