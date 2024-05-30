@@ -11,7 +11,7 @@ const getUser = createAsyncThunk(`${sliceName}/get-user`, async () => {
         console.error(e);
         initDataRaw = window.Telegram?.WebApp.initData;
     }
-    const response = await fetch('https://b021-93-170-66-83.ngrok-free.app/api/user', {
+    const response = await fetch('https://8167-93-170-66-83.ngrok-free.app/api/user', {
         headers: {
             "Content-Type": "application/json",
             Authorization: `tma ${initDataRaw}`,
