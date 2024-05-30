@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@tma.js/sdk": "^2.2.0",
     "@xelene/tgui": "2.0.6",
+    "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "react": "18.2.0",

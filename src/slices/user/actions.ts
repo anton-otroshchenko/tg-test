@@ -1,5 +1,6 @@
 import { createAsyncThunk} from '@reduxjs/toolkit';
 import { retrieveLaunchParams } from "@tma.js/sdk";
+import axios from "axios";
 
 const sliceName = 'user';
 
@@ -11,7 +12,7 @@ const getUser = createAsyncThunk(`${sliceName}/get-user`, async () => {
         console.error(e);
         initDataRaw = window.Telegram?.WebApp.initData;
     }
-    const response = await fetch('https://9836-93-170-66-83.ngrok-free.app/api/user', {
+    const response = await axios.get('https://9836-93-170-66-83.ngrok-free.app/api/user', {
         headers: {
             "Content-Type": "application/json",
             Authorization: `tma ${initDataRaw}`,
