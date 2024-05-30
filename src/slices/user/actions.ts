@@ -16,6 +16,7 @@ const getUser = createAsyncThunk(`${sliceName}/get-user`, async () => {
             "Content-Type": "application/json",
             Authorization: `tma ${initDataRaw}`,
         },
+        method: 'GET'
     });
 
     return await response.json();
