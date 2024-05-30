@@ -132,7 +132,7 @@ div:has(>.input) input:focus {
 }
 
 .frequency, .remindersWrapper, .friendsWrapper {
-    padding: 16px 16px 0 !important;
+    padding: 16px 2px 0 !important;
 }
 
 :global(.MuiOutlinedInput-notchedOutline) {
