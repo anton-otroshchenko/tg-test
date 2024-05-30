@@ -3,11 +3,16 @@ import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import { AppRoot } from '@xelene/tgui';
 import { Habits } from "./pages/Habits/Habits";
 import { CreateHabit } from "./pages/CreateHabit/CreateHabit";
+import { getUser } from "./slices/user/actions";
+import {useAppDispatch} from "./hooks/hooks";
 
 const App = () => {
   window.Telegram?.WebApp.expand();
 
+  const dispatch = useAppDispatch();
+
     useEffect(() => {
+        void dispatch(getUser());
     }, []);
 
   return (
