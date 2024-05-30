@@ -19,7 +19,7 @@ const CreateHabit = () => {
     const [selectedRadio, setSelectedRadio] = useState(1);
     const [activeDays, setActiveDays] = useState(allActiveDays);
     const [isReminderDaysPickerOpened, setIsReminderDaysPickerOpened] = useState(false);
-    const [reminderDaysPicked, setReminderDaysPicked] = useState([true,true,true,true,true,true,true]);
+    const [reminderDaysPicked, setReminderDaysPicked] = useState(allActiveDays);
 
     const handleSelectAllDays = () => {
         setSelectedRadio(1);
@@ -38,6 +38,9 @@ const CreateHabit = () => {
     }
 
     const handleReminderDaysPickerClose = () => {
+        if (!reminderDaysPicked.some(isPicked => isPicked)) {
+            setReminderDaysPicked(allActiveDays);
+        }
         setIsReminderDaysPickerOpened(false);
     }
 
@@ -47,6 +50,15 @@ const CreateHabit = () => {
         );
         setReminderDaysPicked(newReminderDaysPicker);
     }
+
+    const handleGetReminderDaysText = () => {
+        if (reminderDaysPicked.every(isPicked => isPicked)) {
+            return 'Every day';
+        }
+        const selectedDays = reminderDaysOptions.filter((day, index) => reminderDaysPicked[index]);
+        return selectedDays.join(', ');
+    };
+
 
     if(isReminderDaysPickerOpened){
         return (
@@ -114,7 +126,9 @@ const CreateHabit = () => {
                             />
                         </LocalizationProvider>
                         <Button onClick={()=>handleReminderDaysPickerOpen()} className={styles.button} before={<NotificationIcon/>}>
-                            Every day
+                            {
+                                handleGetReminderDaysText()
+                            }
                         </Button>
                     </List>
                 </List>
