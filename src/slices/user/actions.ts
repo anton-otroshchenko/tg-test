@@ -20,7 +20,7 @@ const getUser = createAsyncThunk(`${sliceName}/get-user`, async () => {
         method: 'GET'
     });
 
-    return await response.json();
+    return response.data;
 });
 
 export {
