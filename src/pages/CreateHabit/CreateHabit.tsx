@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Input, FixedLayout, List, Cell, Title, Button, Text, IconButton} from "@xelene/tgui";
+import { Input, FixedLayout, List, Cell, Title, Button, IconButton } from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 import {
@@ -7,14 +7,14 @@ import {
     LocalizationProvider,
 } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import { useForm } from "react-hook-form";
 
 import { ReactComponent as NotificationIcon } from '../../assets/img/notification.svg'
-import { ReactComponent as CheckIcon } from '../../assets/img/check.svg'
 import { ReactComponent as PlusIcon } from '../../assets/img/Plus.svg'
+import {allActiveDays, days, reminderDaysOptions} from "./contants";
+import DayPicker from "./components/DayPicker";
 
-const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-const allActiveDays = [true, true, true, true, true, true, true];
-const reminderDaysOptions= ['Every Monday', 'Every Tuesday', 'Every Wednesday', 'Every Thursday', 'Every Friday', 'Every Saturday', 'Every Sunday'];
+type FormFields = "title" | "description" | "updateDates" | "reminderDays" | "isArchived" | "reminderTime" | "friends" | `updateDates.${number}` | `reminderDays.${number}` | `friends.${number}` | `friends.${number}.friendTgId`;
 
 const CreateHabit = () => {
     const [selectedRadio, setSelectedRadio] = useState(1);
@@ -22,9 +22,26 @@ const CreateHabit = () => {
     const [isReminderDaysPickerOpened, setIsReminderDaysPickerOpened] = useState(false);
     const [reminderDaysPicked, setReminderDaysPicked] = useState(allActiveDays);
 
+    const { register, handleSubmit, setValue } = useForm({
+        defaultValues: {
+            title: '',
+            description: '',
+            updateDates: allActiveDays,
+            reminderDays: allActiveDays,
+            reminderTime: new Date().toISOString(),
+            isArchived: false,
+            friends: [
+                {
+                    friendTgId: '@some_friend',
+                }
+            ],
+        }
+    });
+
     const handleSelectAllDays = () => {
         setSelectedRadio(1);
         setActiveDays(allActiveDays);
+        setValue('updateDates', allActiveDays);
     };
 
     const handleToggleActiveDay = (index: number) => {
@@ -32,6 +49,7 @@ const CreateHabit = () => {
             i === index ? !isActive : isActive
         );
         setActiveDays(newActiveDays);
+        setValue('updateDates', newActiveDays);
     };
 
     const handleReminderDaysPickerOpen = () => {
@@ -43,6 +61,7 @@ const CreateHabit = () => {
             setReminderDaysPicked(allActiveDays);
         }
         setIsReminderDaysPickerOpened(false);
+        setValue('reminderDays', reminderDaysPicked);
     }
 
     const handleReminderDayPick = (index: number) => {
@@ -60,88 +79,100 @@ const CreateHabit = () => {
         return selectedDays.join(', ');
     };
 
+    const onSubmit = (data:any) => {
+        console.log("Form Data:", data);
+    };
 
-    if(isReminderDaysPickerOpened){
+    const handleTimeChange = (newTime: Date | null) => {
+        setValue('reminderTime', newTime?.toISOString() as string);
+    };
+
+    const handleInputChange = (field: FormFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(field, e.target.value);
+    };
+
+
+    if (isReminderDaysPickerOpened) {
         return (
-            <FixedLayout className={styles.wrapper}>
-                <List className={styles.reminderDays}>
-                    {
-                        reminderDaysOptions.map((option, index) => (
-                            <Cell onClick={()=>handleReminderDayPick(index)} className={styles.reminderDay} key={option}>
-                                <Text>{option}</Text>
-                                {reminderDaysPicked[index]&&
-                                    <CheckIcon/>
-                                }
-                            </Cell>
-                        ))
-                    }
-                </List>
-                <Button className={styles.saveButton} onClick={handleReminderDaysPickerClose}>
-                    Save
-                </Button>
-            </FixedLayout>
+            <DayPicker reminderDaysPicked={reminderDaysPicked} handleReminderDayPick={handleReminderDayPick} handleReminderDaysPickerClose={handleReminderDaysPickerClose}/>
         )
     }
 
     return (
-        <FixedLayout className={styles.wrapper}>
-            <List>
-                <Input className={styles.input} placeholder="Title" />
-                <Input className={styles.input} placeholder="Description (optional)" />
-               <List className={styles.frequency}>
-                   <Title className={styles.title}>Frequency</Title>
-                   <List className={styles.radioWrapper}>
-                       <Cell
-                           Component="label"
-                           className={selectedRadio === 1 ? styles.activeTab : styles.tab}
-                           onClick={handleSelectAllDays}
-                           multiline
-                       >
-                           Daily
-                       </Cell>
-                       <Cell
-                           Component="label"
-                           className={selectedRadio === 2 ? styles.activeTab : styles.tab}
-                           onClick={() => setSelectedRadio(2)}
-                           multiline
-                       >
-                           Specific days
-                       </Cell>
-                   </List>
-                   {selectedRadio === 2 &&
-                       <List className={styles.daysWrapper}>
-                           {days.map((day, i) => (
-                               <Cell onClick={() => handleToggleActiveDay(i)} key={day} className={clsx(styles.day, activeDays[i] ? styles.activeDay : '')}>{day}</Cell>
-                           ))}
-                       </List>
-                   }
-               </List>
-                <List className={styles.remindersWrapper}>
-                    <Title className={styles.title}>Reminders</Title>
-                    <List className={styles.reminders}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DesktopTimePicker
-                                value={new Date()}
-                                ampm={false}
-                                views={['hours', 'minutes']}
-                            />
-                        </LocalizationProvider>
-                        <Button onClick={()=>handleReminderDaysPickerOpen()} className={styles.button} before={<NotificationIcon/>}>
-                            {
-                                handleGetReminderDaysText()
-                            }
-                        </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <FixedLayout className={styles.wrapper}>
+                <List>
+                    <Input
+                        className={styles.input}
+                        placeholder="Title"
+                        {...register("title")}
+                        onChange={handleInputChange('title')}
+                    />
+
+                    <Input
+                        className={styles.input}
+                        placeholder="Description (optional)"
+                        {...register("description")}
+                        onChange={handleInputChange('description')}
+                    />
+
+                    <List className={styles.frequency}>
+                        <Title className={styles.title}>Frequency</Title>
+                        <List className={styles.radioWrapper}>
+                            <Cell
+                                Component="label"
+                                className={selectedRadio === 1 ? styles.activeTab : styles.tab}
+                                onClick={handleSelectAllDays}
+                                multiline
+                            >
+                                Daily
+                            </Cell>
+                            <Cell
+                                Component="label"
+                                className={selectedRadio === 2 ? styles.activeTab : styles.tab}
+                                onClick={() => setSelectedRadio(2)}
+                                multiline
+                            >
+                                Specific days
+                            </Cell>
+                        </List>
+                        {selectedRadio === 2 &&
+                            <List className={styles.daysWrapper}>
+                                {days.map((day, i) => (
+                                    <Cell onClick={() => handleToggleActiveDay(i)} key={day} className={clsx(styles.day, activeDays[i] ? styles.activeDay : '')}>{day}</Cell>
+                                ))}
+                            </List>
+                        }
+                    </List>
+
+                    <List className={styles.remindersWrapper}>
+                        <Title className={styles.title}>Reminders</Title>
+                        <List className={styles.reminders}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DesktopTimePicker
+                                    value={new Date()}
+                                    onChange={handleTimeChange}
+                                    ampm={false}
+                                    views={['hours', 'minutes']}
+                                />
+                            </LocalizationProvider>
+                            <Button onClick={handleReminderDaysPickerOpen} className={styles.button} before={<NotificationIcon />}>
+                                {handleGetReminderDaysText()}
+                            </Button>
+                        </List>
+                    </List>
+
+                    <List className={styles.friendsWrapper}>
+                        <Title className={styles.title}>Share with friends</Title>
+                        <IconButton className={styles.plusButton}><PlusIcon /></IconButton>
                     </List>
                 </List>
-                <List className={styles.friendsWrapper}>
-                    <Title className={styles.title}>Share with friends</Title>
-                    <IconButton className={styles.plusButton}><PlusIcon/></IconButton>
-                </List>
-            </List>
-            <Button className={styles.saveButton}>
-                Create
-            </Button>
-        </FixedLayout>
+
+                <Button type="submit" className={styles.saveButton}>
+                    Create
+                </Button>
+            </FixedLayout>
+        </form>
     );
 };
 
