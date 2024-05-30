@@ -44,7 +44,7 @@ const CreateHabit = () => {
             <FixedLayout className={clsx(styles.wrapper, styles.daysPicker)}>
                 <List className={styles.reminderDays}>
                     {
-                        reminderDaysOptions.map((option, index) => (
+                        reminderDaysOptions.map((option) => (
                             <Cell key={option}>{option}</Cell>
                         ))
                     }
