@@ -132,8 +132,8 @@ div:has(>.input){
 }
 
 :global(.MuiInputBase-input) {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 :global(.MuiButtonBase-root) {
