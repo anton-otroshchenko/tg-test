@@ -203,3 +203,9 @@ div:has(>.input){
     align-items: center;
     width: 100%;
 }
+
+.saveButton {
+    width: 207px;
+    background: #111827 !important;
+    margin: 0 auto 50px;
+}
