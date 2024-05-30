@@ -1,5 +1,5 @@
 import React from 'react';
-import { FixedLayout, Title, Text, Button } from "@xelene/tgui";
+import { FixedLayout, Title, Text, IconButton } from "@xelene/tgui";
 
 import { ReactComponent as PlusIcon} from '../../assets/img/Plus.svg';
 
@@ -18,7 +18,9 @@ const Habits = () => {
             <Text style={{color: "#767683"}}>
                 Add a habit to get started
             </Text>
-            <Button onClick={handleAddHabit} className={styles.button} before={<PlusIcon/>}/>
+            <IconButton className={styles.button} onClick={handleAddHabit}>
+                <PlusIcon/>
+            </IconButton>
         </FixedLayout>
     );
 };

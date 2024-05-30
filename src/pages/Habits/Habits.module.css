@@ -12,20 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 0;
     background: transparent;
-
-    div {
-        margin-left: 10px;
-    }
-}
-
-.button:after, button span, .button {
-    border-radius: 25%;
-    width: 53px;
-    height: 45px;
-}
-
-.button:hover:after {
-    opacity: 0;
 }

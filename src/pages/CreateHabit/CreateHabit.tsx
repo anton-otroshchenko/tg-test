@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, FixedLayout, List, Cell, Title } from "@xelene/tgui";
+import {Input, FixedLayout, List, Cell, Title, Button} from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 import {
@@ -7,6 +7,8 @@ import {
     LocalizationProvider,
 } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+
+import { ReactComponent as NotificationIcon } from '../../assets/img/notification.svg'
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 const allActiveDays = [true, true, true, true, true, true, true];
@@ -70,7 +72,9 @@ const CreateHabit = () => {
                                 views={['hours', 'minutes']}
                             />
                         </LocalizationProvider>
-
+                        <Button className={styles.button} before={<NotificationIcon/>}>
+                            Every day
+                        </Button>
                     </List>
                 </List>
             </List>

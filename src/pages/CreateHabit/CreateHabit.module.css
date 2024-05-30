@@ -131,6 +131,10 @@ div:has(>.input){
     font-weight: 400 !important;
 }
 
+:global(.MuiFormControl-root){
+    flex: 1;
+}
+
 :global(.MuiInputBase-input) {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -153,4 +157,27 @@ div:has(>.input){
     background: #EFF1FB !important;
     border-radius: 31px;
     padding: 0 !important;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-start;
+    flex: 2;
+    background: transparent !important;
+    padding: 0 !important;
+    max-height: 32px !important;
+    color: #040415 !important;
+}
+
+.button h6 {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.reminders div {
+    margin-bottom: 0 !important;
+}
+
+.button:hover:after {
+    opacity: 0 !important;
 }
