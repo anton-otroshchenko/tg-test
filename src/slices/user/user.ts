@@ -1,0 +1,1 @@
+export { reducer } from '../user/user.slice';

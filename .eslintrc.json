@@ -33,9 +33,7 @@
     "@typescript-eslint/no-unused-vars": ["warn", {
       "ignoreRestSiblings": true
     }],
-    "no-restricted-imports": ["error", {
-      "patterns": ["@vkontakte/icons/dist/*"]
-    }],
+    "no-restricted-imports": ["error"],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn"
   }

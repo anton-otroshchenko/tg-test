@@ -1,5 +1,3 @@
-# Getting Started with TGUI Example
-
 ## Available Scripts
 
 In the project directory, you can run:
