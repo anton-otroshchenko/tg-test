@@ -126,9 +126,9 @@ div:has(>.input){
 :global(.MuiInputBase-root) {
     flex-direction: row-reverse;
     border: none;
-    color: #040415;
-    font-size: 14px;
-    font-weight: 400;
+    color: #040415 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
 }
 
 :global(.MuiInputBase-input) {
