@@ -13,7 +13,7 @@ const getUser = createAsyncThunk(`${sliceName}/get-user`, async () => {
     }
     const response = await fetch('https://8167-93-170-66-83.ngrok-free.app/api/user', {
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain",
             Authorization: `tma ${initDataRaw}`,
         },
         method: 'GET'
