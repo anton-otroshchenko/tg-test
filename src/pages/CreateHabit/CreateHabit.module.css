@@ -1,7 +1,9 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 16px;
+    min-height: 100vh;
     height: 100%;
     padding: 0 4px;
     position: relative;
@@ -115,7 +117,7 @@ div:has(>.input){
     color: #ffffff;
 }
 
-.frequency, .remindersWrapper {
+.frequency, .remindersWrapper, .friendsWrapper {
     padding: 16px 16px 0 !important;
 }
 
@@ -184,11 +186,6 @@ div:has(>.input){
     opacity: 0 !important;
 }
 
-.daysPicker{
-    min-height: 100vh;
-    justify-content: space-between;
-}
-
 .reminderDays {
     color: #000000 !important;
 }
@@ -209,4 +206,18 @@ div:has(>.input){
     width: 207px;
     background: #111827 !important;
     margin: 0 auto 50px;
+}
+
+.plusButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    background: transparent;
+    padding: 0 !important;
+}
+
+.plusButton svg {
+    width: 24px;
+    height: 24px;
 }

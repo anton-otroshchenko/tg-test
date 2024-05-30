@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Input, FixedLayout, List, Cell, Title, Button, Text} from "@xelene/tgui";
+import {Input, FixedLayout, List, Cell, Title, Button, Text, IconButton} from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 import {
@@ -10,6 +10,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 import { ReactComponent as NotificationIcon } from '../../assets/img/notification.svg'
 import { ReactComponent as CheckIcon } from '../../assets/img/check.svg'
+import { ReactComponent as PlusIcon } from '../../assets/img/Plus.svg'
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 const allActiveDays = [true, true, true, true, true, true, true];
@@ -62,7 +63,7 @@ const CreateHabit = () => {
 
     if(isReminderDaysPickerOpened){
         return (
-            <FixedLayout className={clsx(styles.wrapper, styles.daysPicker)}>
+            <FixedLayout className={styles.wrapper}>
                 <List className={styles.reminderDays}>
                     {
                         reminderDaysOptions.map((option, index) => (
@@ -132,7 +133,14 @@ const CreateHabit = () => {
                         </Button>
                     </List>
                 </List>
+                <List className={styles.friendsWrapper}>
+                    <Title className={styles.title}>Share with friends</Title>
+                    <IconButton className={styles.plusButton}><PlusIcon/></IconButton>
+                </List>
             </List>
+            <Button className={styles.saveButton}>
+                Create
+            </Button>
         </FixedLayout>
     );
 };
