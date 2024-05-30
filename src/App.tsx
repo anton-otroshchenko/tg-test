@@ -13,7 +13,7 @@ const App = () => {
 
     useEffect(() => {
         void dispatch(getUser());
-    }, []);
+    }, [dispatch]);
 
   return (
       <AppRoot style={{ background: '#fff' }}>
