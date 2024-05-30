@@ -119,16 +119,37 @@ div:has(>.input){
     padding: 16px 16px 0 !important;
 }
 
-.timeInput {
-    font-size: 16px;
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: red;
-    padding: 8px;
-    outline: none;
-    -webkit-appearance: none; /* Remove default styling in WebKit browsers */
-    -moz-appearance: none; /* Remove default styling in Mozilla browsers */
-    appearance: none; /* Remove default styling in all browsers */
+:global(.MuiOutlinedInput-notchedOutline) {
+    visibility: hidden;
+}
+
+:global(.MuiInputBase-root) {
+    flex-direction: row-reverse;
+    border: none;
+    color: #040415;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+:global(.MuiInputBase-input) {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+:global(.MuiButtonBase-root) {
+    margin-right: -18px !important;
+}
+
+:global(.MuiSvgIcon-root) {
+    width: 16px;
+    height: 16px;
+}
+
+.reminders {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+    background: #EFF1FB !important;
+    border-radius: 31px;
 }

@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Input, FixedLayout, List, Cell, Title } from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
-import { DesktopTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import {
+    DesktopTimePicker,
+    LocalizationProvider,
+} from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 const days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -59,13 +62,16 @@ const CreateHabit = () => {
                </List>
                 <List className={styles.remindersWrapper}>
                     <Title className={styles.title}>Reminders</Title>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DesktopTimePicker
-                            value={new Date()}
-                            ampm
-                            views={['hours', 'minutes']}
-                        />
-                    </LocalizationProvider>
+                    <List className={styles.reminders}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DesktopTimePicker
+                                value={new Date()}
+                                ampm={false}
+                                views={['hours', 'minutes']}
+                            />
+                        </LocalizationProvider>
+
+                    </List>
                 </List>
             </List>
         </FixedLayout>
