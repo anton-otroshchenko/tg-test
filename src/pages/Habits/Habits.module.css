@@ -41,7 +41,7 @@
 .commandMenu {
     display: flex;
     justify-content: space-between;
-    padding: 20px 15px !important;
+    padding: 20px 15px 10px !important;
     max-width: 360px;
     width: 100%;
 }
