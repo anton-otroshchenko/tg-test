@@ -16,6 +16,7 @@ import clsx from "clsx";
 
 const Habits = () => {
   const user = useAppSelector(state => state.user.user);
+  console.log(user)
 
   useEffect(() => {
     store.dispatch(getHabits());
