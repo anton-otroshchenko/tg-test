@@ -47,7 +47,7 @@ const Habits = () => {
       {1
         ?
         habitsToDisplay ?
-          <FixedLayout className={clsx(styles.habits, styles.habitsList)} vertical='top'>
+          <FixedLayout className={clsx(styles.habits, styles.habitsDashboard)} vertical='top'>
             <List className={styles.progress}>
               <Text style={{ color: "#000000", fontSize: '12px', fontWeight: '600' }}>
                Your Progress
@@ -81,6 +81,15 @@ const Habits = () => {
                 </IconButton>
                 <Text style={{ color: "#000000", fontSize: '12px' }}>Settings</Text>
               </List>
+            </List>
+            <List className={styles.habitsList}>
+              {habitsToDisplay.map((habit, index) => (
+                  <List>
+                    <Text>
+                      {habit.title}
+                    </Text>
+                  </List>
+              ))}
             </List>
           </FixedLayout>
           :

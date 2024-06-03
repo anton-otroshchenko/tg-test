@@ -17,7 +17,7 @@
     font-weight: 600 !important;
 }
 
-.habitsList {
+.habitsDashboard {
     padding: 20px 10px 0 !important;
 }
 
@@ -41,7 +41,7 @@
 .commandMenu {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0 !important;
+    padding: 35px 0 !important;
     max-width: 380px;
     width: 100%;
 }
@@ -83,4 +83,12 @@
     flex-direction: column;
     align-items: center;
     color: #000000 !important;
+}
+
+.habitsList {
+    color: #000000 !important;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 60px;
 }
