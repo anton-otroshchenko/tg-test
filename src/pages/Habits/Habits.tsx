@@ -6,6 +6,7 @@ import { ReactComponent as SmallPlus } from '../../assets/img/small-plus.svg';
 import { ReactComponent as Settings } from '../../assets/img/settings.svg';
 import { ReactComponent as Friends } from '../../assets/img/friends.svg';
 import { ReactComponent as Statistics } from '../../assets/img/statistics.svg';
+import { ReactComponent as WhiteCHeck } from '../../assets/img/check-white.svg';
 
 import styles from './Habits.module.css';
 import { useAppSelector } from '../../hooks';
@@ -13,6 +14,7 @@ import { store } from '../../store/store';
 import { getHabits } from '../../store/habitsSlice';
 import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
+import {days} from "../../constants/constants";
 
 const Habits = () => {
   const user = useAppSelector(state => state.user.user);
@@ -85,9 +87,27 @@ const Habits = () => {
             <List className={styles.habitsList}>
               {habitsToDisplay.map((habit) => (
                   <List className={styles.habitsListItem} key={habit.id}>
-                    <Text>
+                    <Text className={styles.habitTitle}>
                       {habit.title}
                     </Text>
+                    <Text style={{ color: "#767683", fontSize: '12px', fontWeight: '400' }}>
+                      Streak +2 | Overall 71% | 2 friends
+                    </Text>
+                    <List className={styles.daysList}>
+                      {days.map(day => (
+                          <List>
+                            <IconButton className={clsx(styles.button, styles.checkIcon)}>
+                              <WhiteCHeck/>
+                            </IconButton>
+                            <Text style={{
+                              color: "#767683",
+                              fontSize: '14px',
+                            }}>
+                              {day}
+                            </Text>
+                          </List>
+                      ))}
+                    </List>
                   </List>
               ))}
             </List>

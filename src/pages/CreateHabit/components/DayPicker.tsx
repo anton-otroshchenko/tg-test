@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "../CreateHabit.module.css";
 import {Button, Cell, FixedLayout, List, Text} from "@xelene/tgui";
-import {reminderDaysOptions} from "../contants";
+import {reminderDaysOptions} from "../../../constants/constants";
 import { ReactComponent as CheckIcon } from '../../../assets/img/check.svg'
 
 type Props = {

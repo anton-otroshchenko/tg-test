@@ -93,5 +93,27 @@
 }
 
 .habitsListItem {
-    padding: 0 5px !important;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px !important;
+}
+
+.habitTitle {
+    color: #000000;
+    font-size: 17px;
+    margin-bottom: 0 !important;
+}
+
+.checkIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #111827;
+}
+
+.daysList {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    text-align: center;
 }

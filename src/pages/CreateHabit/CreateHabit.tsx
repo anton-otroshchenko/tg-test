@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 
 import { ReactComponent as NotificationIcon } from '../../assets/img/notification.svg';
 import { ReactComponent as PlusIcon } from '../../assets/img/Plus.svg';
-import { allActiveDays, days, reminderDaysOptions } from "./contants";
+import { allActiveDays, days, reminderDaysOptions } from "../../constants/constants";
 import DayPicker from "./components/DayPicker";
 import { store } from '../../store/store';
 import { createHabit } from '../../store/habitsSlice';
