@@ -117,3 +117,8 @@
     gap: 20px;
     text-align: center;
 }
+
+.day {
+    padding: 0 !important;
+    margin: 0 !important;
+}

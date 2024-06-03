@@ -95,7 +95,7 @@ const Habits = () => {
                     </Text>
                     <List className={styles.daysList}>
                       {days.map(day => (
-                          <List>
+                          <List className={styles.day}>
                             <IconButton className={clsx(styles.button, styles.checkIcon)}>
                               <WhiteCHeck/>
                             </IconButton>
