@@ -84,7 +84,7 @@ const Habits = () => {
             </List>
             <List className={styles.habitsList}>
               {habitsToDisplay.map((habit) => (
-                  <List>
+                  <List className={styles.habitsListItem} key={habit.id}>
                     <Text>
                       {habit.title}
                     </Text>
