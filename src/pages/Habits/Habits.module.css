@@ -4,8 +4,29 @@
     justify-content: flex-start;
     align-items: center;
     height: 100%;
+}
+
+.createHabit {
     padding: 80px 55px 0;
     gap: 16px;
+}
+
+.percent {
+    color: #000000;
+    font-size: 46px;
+    font-weight: 600 !important;
+}
+
+.habitsList {
+    padding: 40px 55px 0;
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 !important;
+    width: 100%;
 }
 
 .button {
@@ -14,4 +35,52 @@
     align-items: center;
     margin-top: 0;
     background: transparent;
+    margin-bottom: 0 !important;
+}
+
+.commandMenu {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+    max-width: 379px;
+    width: 100%;
+}
+
+.plusIcon {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    padding: 8px 10px;
+    width: 32px;
+    height: 32px;
+}
+
+.friendsIcon {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    padding: 8px 7px;
+    width: 32px;
+    height: 32px;
+}
+
+.statisticsIcon {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    padding: 7px 8px;
+    width: 32px;
+    height: 32px;
+}
+
+.settingIcon {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    padding: 7px 10px;
+    width: 32px;
+    height: 32px;
+}
+
+.commandMenuItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000000 !important;
 }
