@@ -18,7 +18,7 @@
 }
 
 .habitsDashboard {
-    padding: 20px 10px 0 !important;
+    padding: 20px 0 0 !important;
 }
 
 .progress {
@@ -41,7 +41,7 @@
 .commandMenu {
     display: flex;
     justify-content: space-between;
-    padding: 35px 0 !important;
+    padding: 35px 10px !important;
     max-width: 380px;
     width: 100%;
 }
