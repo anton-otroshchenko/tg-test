@@ -8,6 +8,7 @@
 }
 
 :global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root){
+    width: 100% !important;
     display: flex !important;
     justify-content: flex-start !important;
     align-items: flex-start !important;
