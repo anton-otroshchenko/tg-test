@@ -5,11 +5,11 @@ import styles from './Habit.module.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {DateCalendar, PickersDayProps, PickerValidDate} from '@mui/x-date-pickers';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
     if (date === null) return '';
-    const day = dayjs(date).day()
+    const day = dayjs(date).day();
     const dayMap: { [key: number]: string } = {
         0: 'Sun',
         1: 'Mon',
@@ -22,23 +22,34 @@ const dayOfWeekFormatter = (date: PickerValidDate): string => {
     return dayMap[day];
 };
 
-const CustomDay = (props: PickersDayProps<Dayjs>) => {
-    const { selected } = props;
+// Custom day component
+const CustomDay: React.FC<PickersDayProps<Dayjs>> = (props) => {
+    const { selected, day } = props;
+
+    // Convert day to Dayjs object
+    const validDay = dayjs(day);
+
+    // Check if the day is in the current month
+    const isCurrentMonth = validDay.month() === dayjs().month();
+
+    // Get day of the month or fallback to an empty string if not in the current month
+    const dayOfMonth = isCurrentMonth && validDay.isValid() ? validDay.date() : '';
+
     return (
-        <div onClick={()=> console.log(123)}  style={{ border: selected ? '1px solid blue' : '1px solid transparent' }}>
+        <div onClick={() => console.log(123)} style={{ border: selected ? '1px solid blue' : '1px solid transparent' }}>
             <div style={{
-                color: '#000000'
-            }}>Custom Content</div>
+                color: '#000000',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                {dayOfMonth || ''}
+            </div>
         </div>
     );
-};
-
-const renderDay = (
-    day: Dayjs,
-    selectedDates: Array<Dayjs | null>,
-    pickersDayProps: PickersDayProps<Dayjs>
-) => {
-    return <CustomDay {...pickersDayProps} day={day} />;
 };
 
 const Habit = () => {
@@ -56,13 +67,11 @@ const Habit = () => {
     return (
         <FixedLayout vertical='top' className={styles.habitWrapper}>
             <HabitHeader title={habit.title} />
-            <LocalizationProvider dateAdapter={AdapterDayjs} >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar
                     dayOfWeekFormatter={dayOfWeekFormatter}
                     slots={{
-                        //@ts-ignore
-                        day: (day: any, selectedDates: any, pickersDayProps: any) =>
-                            renderDay(day, selectedDates, pickersDayProps),
+                        day: CustomDay
                     }}
                 />
             </LocalizationProvider>
