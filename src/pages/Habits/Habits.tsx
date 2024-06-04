@@ -17,6 +17,7 @@ import { getHabits } from '../../store/habitsSlice';
 import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
 import {days, dayStatus} from "../../constants/constants";
+import {useOutsideClick} from "../../hooks/hooks";
 
 
 type DayStatus = 'completed' | 'not_completed' | 'miss';
@@ -38,6 +39,12 @@ const Habits = () => {
   // const habits = useAppSelector(state => state.habits.items);
 
   const [selectedHabitId, setSelectedHabitId] = useState<number | null>(null);
+  const [selectedDayId, setSelectedDayId] = useState<number | null>(null);
+  const ref = useOutsideClick(() => {
+    setSelectedHabitId(null);
+  });
+
+  console.log(selectedDayId)
 
   const handleRenderIcon = (icon: string) => {
     switch(icon){
@@ -53,7 +60,7 @@ const Habits = () => {
     }
   }
 
-  const [habitsToDisplay,] = useState([
+  const [habitsToDisplay, setHabitsToDisplay] = useState([
     {
       id: 1,
       title: 'Drink 50 litres of water',
@@ -133,7 +140,10 @@ const Habits = () => {
                     <List className={styles.daysWrapper}>
                       <List className={styles.daysList}>
                         {habit.days.map((day, index) => (
-                            <List className={styles.day} onClick={() => setSelectedHabitId(habit.id)}>
+                            <List className={styles.day} onClick={() => {
+                              setSelectedHabitId(habit.id)
+                              setSelectedDayId(index)
+                            }}>
                               {
                                 day ?
                                     <IconButton className={clsx(styles.button, dayStatusToClassName[day as DayStatus])}>
@@ -152,9 +162,15 @@ const Habits = () => {
                         ))}
                       </List>
                       {selectedHabitId === habit.id &&
-                          <List className={styles.statusModal}>
+                          <div ref={ref} className={styles.statusModal}>
                             <List className={styles.statusModalItem}>
-                              <IconButton className={clsx(styles.button, styles.checkIconBig)}>
+                              <IconButton onClick={()=>{
+                                const newHabits = habitsToDisplay;
+                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'completed'
+                                setHabitsToDisplay(newHabits);
+                                setSelectedDayId(null);
+                                setSelectedHabitId(null);
+                              }} className={clsx(styles.button, styles.checkIconBig)}>
                                 <WhiteCheck/>
                               </IconButton>
                               <Text style={{
@@ -163,7 +179,13 @@ const Habits = () => {
                               }}>{dayStatus.SUCCESS}</Text>
                             </List>
                             <List className={styles.statusModalItem}>
-                              <IconButton className={clsx(styles.button, styles.crossIconBig)}>
+                              <IconButton onClick={()=>{
+                                const newHabits = habitsToDisplay;
+                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'not_completed'
+                                setHabitsToDisplay(newHabits);
+                                setSelectedDayId(null);
+                                setSelectedHabitId(null);
+                              }}  className={clsx(styles.button, styles.crossIconBig)}>
                                 <CrossIcon/>
                               </IconButton>
                               <Text style={{
@@ -172,7 +194,13 @@ const Habits = () => {
                               }}>{dayStatus.FAIL}</Text>
                             </List>
                             <List className={styles.statusModalItem}>
-                              <IconButton className={clsx(styles.button, styles.missIconBig)}>
+                              <IconButton onClick={()=>{
+                                const newHabits = habitsToDisplay;
+                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'miss'
+                                setHabitsToDisplay(newHabits);
+                                setSelectedDayId(null);
+                                setSelectedHabitId(null);
+                              }}  className={clsx(styles.button, styles.missIconBig)}>
                                 <MissIcon/>
                               </IconButton>
                               <Text style={{
@@ -180,7 +208,7 @@ const Habits = () => {
                                 fontSize: '11px',
                               }}>{dayStatus.SKIP}</Text>
                             </List>
-                          </List>
+                          </div>
                       }
                     </List>
                   </List>
