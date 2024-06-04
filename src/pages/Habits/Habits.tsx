@@ -35,7 +35,7 @@ const Habits = () => {
     store.dispatch(getHabits());
   }, []);
 
-  const habits = useAppSelector(state => state.habits.items);
+  // const habits = useAppSelector(state => state.habits.items);
 
   const [selectedHabitId, setSelectedHabitId] = useState<number | null>(null);
 
@@ -53,7 +53,7 @@ const Habits = () => {
     }
   }
 
-  const [habitsToDisplay, setHabitsToDisplay] = useState([
+  const [habitsToDisplay,] = useState([
     {
       id: 1,
       title: 'Drink 50 litres of water',
@@ -75,7 +75,6 @@ const Habits = () => {
       days: ['', 'miss', '', '', '', '', '']
     },
   ]);
-  const [isStatusModalOpened, setIsStatusModalOpened] = useState(false);
 
   const navigate = useNavigate();
   const handleAddHabit = () => {
