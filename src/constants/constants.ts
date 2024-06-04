@@ -1,4 +1,4 @@
-const constants = {
+const dayStatus = {
     SUCCESS: 'Success',
     FAIL: 'Fail',
     SKIP: 'Skip'
@@ -9,4 +9,4 @@ const allActiveDays = [true, true, true, true, true, true, true];
 const reminderDaysOptions = ['Every Monday', 'Every Tuesday', 'Every Wednesday', 'Every Thursday', 'Every Friday', 'Every Saturday', 'Every Sunday'];
 
 
-export { constants, days, reminderDaysOptions, allActiveDays };
+export { dayStatus, days, reminderDaysOptions, allActiveDays };

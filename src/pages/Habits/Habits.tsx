@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { FixedLayout, Title, Text, IconButton, Spinner, List } from "@xelene/tgui";
 
 import { ReactComponent as PlusIcon } from '../../assets/img/Plus.svg';
@@ -6,7 +6,9 @@ import { ReactComponent as SmallPlus } from '../../assets/img/small-plus.svg';
 import { ReactComponent as Settings } from '../../assets/img/settings.svg';
 import { ReactComponent as Friends } from '../../assets/img/friends.svg';
 import { ReactComponent as Statistics } from '../../assets/img/statistics.svg';
-import { ReactComponent as WhiteCHeck } from '../../assets/img/check-white.svg';
+import { ReactComponent as WhiteCheck } from '../../assets/img/check-white.svg';
+import { ReactComponent as CrossIcon } from '../../assets/img/cross.svg';
+import { ReactComponent as MissIcon } from '../../assets/img/miss.svg';
 
 import styles from './Habits.module.css';
 import { useAppSelector } from '../../hooks';
@@ -14,7 +16,16 @@ import { store } from '../../store/store';
 import { getHabits } from '../../store/habitsSlice';
 import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
-import {days} from "../../constants/constants";
+import {days, dayStatus} from "../../constants/constants";
+
+
+type DayStatus = 'completed' | 'not_completed' | 'miss';
+
+const dayStatusToClassName: Record<DayStatus, string> = {
+  completed: styles.checkIcon,
+  not_completed: styles.crossIcon,
+  miss: styles.missIcon,
+};
 
 const Habits = () => {
   const user = useAppSelector(state => state.user.user);
@@ -25,9 +36,24 @@ const Habits = () => {
   }, []);
 
   const habits = useAppSelector(state => state.habits.items);
-  console.log(habits);
 
-  const habitsToDisplay = [
+  const [selectedHabitId, setSelectedHabitId] = useState<number | null>(null);
+
+  const handleRenderIcon = (icon: string) => {
+    switch(icon){
+      case "completed": {
+        return <WhiteCheck/>
+      }
+      case "not_completed": {
+        return <CrossIcon/>
+      }
+      case "miss": {
+        return <MissIcon/>
+      }
+    }
+  }
+
+  const [habitsToDisplay, setHabitsToDisplay] = useState([
     {
       id: 1,
       title: 'Drink 50 litres of water',
@@ -36,8 +62,20 @@ const Habits = () => {
       reminderDays: [true,true,true,true,false,true,false],
       reminderTime: "2024-06-03T06:53:28.888Z",
       isArchived: false,
-    }
-  ];
+      days: ['completed', 'not_completed', '', '', '', '', '']
+    },
+    {
+      id: 2,
+      title: 'Drink 52 litres of water',
+      description: 'I want to drink 50 litres of water',
+      updateDays: [true,true,true,true,false,true,false],
+      reminderDays: [true,true,true,true,false,true,false],
+      reminderTime: "2024-06-03T06:53:28.888Z",
+      isArchived: false,
+      days: ['', 'miss', '', '', '', '', '']
+    },
+  ]);
+  const [isStatusModalOpened, setIsStatusModalOpened] = useState(false);
 
   const navigate = useNavigate();
   const handleAddHabit = () => {
@@ -93,20 +131,58 @@ const Habits = () => {
                     <Text style={{ color: "#767683", fontSize: '12px', fontWeight: '400' }}>
                       Streak +2 | Overall 71% | 2 friends
                     </Text>
-                    <List className={styles.daysList}>
-                      {days.map(day => (
-                          <List className={styles.day}>
-                            <IconButton className={clsx(styles.button, styles.checkIcon)}>
-                              <WhiteCHeck/>
-                            </IconButton>
-                            <Text style={{
-                              color: "#767683",
-                              fontSize: '14px',
-                            }}>
-                              {day}
-                            </Text>
+                    <List className={styles.daysWrapper}>
+                      <List className={styles.daysList}>
+                        {habit.days.map((day, index) => (
+                            <List className={styles.day} onClick={() => setSelectedHabitId(habit.id)}>
+                              {
+                                day ?
+                                    <IconButton className={clsx(styles.button, dayStatusToClassName[day as DayStatus])}>
+                                      {handleRenderIcon(day)}
+                                    </IconButton>
+                                    :
+                                    <div className={styles.emptyDay}/>
+                              }
+                              <Text style={{
+                                color: "#767683",
+                                fontSize: '14px',
+                              }}>
+                                {days[index]}
+                              </Text>
+                            </List>
+                        ))}
+                      </List>
+                      {selectedHabitId === habit.id &&
+                          <List className={styles.statusModal}>
+                            <List className={styles.statusModalItem}>
+                              <IconButton className={clsx(styles.button, styles.checkIconBig)}>
+                                <WhiteCheck/>
+                              </IconButton>
+                              <Text style={{
+                                color: '#767683',
+                                fontSize: '11px',
+                              }}>{dayStatus.SUCCESS}</Text>
+                            </List>
+                            <List className={styles.statusModalItem}>
+                              <IconButton className={clsx(styles.button, styles.crossIconBig)}>
+                                <CrossIcon/>
+                              </IconButton>
+                              <Text style={{
+                                color: '#767683',
+                                fontSize: '11px',
+                              }}>{dayStatus.FAIL}</Text>
+                            </List>
+                            <List className={styles.statusModalItem}>
+                              <IconButton className={clsx(styles.button, styles.missIconBig)}>
+                                <MissIcon/>
+                              </IconButton>
+                              <Text style={{
+                                color: '#767683',
+                                fontSize: '11px',
+                              }}>{dayStatus.SKIP}</Text>
+                            </List>
                           </List>
-                      ))}
+                      }
                     </List>
                   </List>
               ))}
@@ -124,7 +200,7 @@ const Habits = () => {
               <PlusIcon />
             </IconButton>
           </FixedLayout>
-        
+
         :  <Spinner size="l" />
       }
     </FixedLayout>

@@ -111,15 +111,80 @@
     background: #111827;
 }
 
+.checkIconBig{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #111827;
+}
+
+.crossIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #7D8391;
+}
+
+.crossIconBig {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #7D8391;
+}
+
+.missIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #D4D9E9;
+}
+
+.missIconBig {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #D4D9E9;
+}
+
 .daysList {
     display: flex;
-    width: 100%;
     gap: 18px;
     text-align: center;
+    padding: 0 !important;
+}
+
+.daysWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     padding: 0 !important;
 }
 
 .day {
     padding: 0 !important;
     margin: 0 !important;
+}
+
+.emptyDay{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+}
+
+.statusModal {
+    display: flex;
+    gap: 10px;
+}
+
+.statusModalItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
 }
