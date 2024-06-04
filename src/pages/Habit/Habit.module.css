@@ -2,3 +2,18 @@
     padding: 30px 10px !important;
 }
 
+:global(.MuiDateCalendar-root){
+    border: none !important;
+    width: 100% !important;
+}
+
+:global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root){
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+:global(.MuiDayCalendar-weekContainer) {
+    width: 100% !important;
+    justify-content: space-between !important;
+}

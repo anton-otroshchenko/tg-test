@@ -3,8 +3,9 @@ import React from 'react';
 import {FixedLayout} from '@xelene/tgui'
 import {HabitHeader} from "../../components/HabitHeader/HabitHeader";
 import styles from './Habit.module.css'
-import {DateCalendar, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const Habit = () => {
 
@@ -22,7 +23,7 @@ const Habit = () => {
     return (
         <FixedLayout vertical='top' className={styles.habitWrapper}>
             <HabitHeader title={habit.title}/>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar/>
             </LocalizationProvider>
         </FixedLayout>
