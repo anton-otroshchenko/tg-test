@@ -19,6 +19,9 @@
 }
 
 :global(.MuiDayCalendar-monthContainer) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
     width: 100% !important;
 }
 

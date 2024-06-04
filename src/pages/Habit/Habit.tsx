@@ -37,17 +37,20 @@ const CustomDay: React.FC<PickersDayProps<Dayjs>> = (props) => {
 
     return (
         <div onClick={() => console.log(123)} style={{ border: selected ? '1px solid blue' : '1px solid transparent' }}>
-            <div style={{
-                color: '#000000',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                {dayOfMonth || ''}
-            </div>
+            {isCurrentMonth &&
+                <div style={{
+                    color: '#ffffff',
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: '#111827'
+                }}>
+                    {dayOfMonth || ''}
+                </div>
+            }
         </div>
     );
 };
