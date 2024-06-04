@@ -25,3 +25,8 @@
 :global(.MuiButtonBase-root) {
    margin-right: 0 !important;
 }
+
+:global(.MuiPickersFadeTransitionGroup-root), :global(.MuiPickersFadeTransitionGroup-root > div), :global(.MuiPickersFadeTransitionGroup-root > div > div),
+:global(.MuiPickersSlideTransition-root) {
+    height: 100% !important;
+}
