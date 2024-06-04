@@ -6,6 +6,7 @@ import { CreateHabit } from "./pages/CreateHabit/CreateHabit";
 import { getUser } from './store/userSlice';
 import { store } from './store/store';
 import { useAppSelector } from './hooks';
+import {Habit} from "./pages/Habit/Habit";
 
 // Debug Component
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Habits />} />
           <Route path="/create-habit" element={<CreateHabit />} />
+          <Route path="/habit/:id" element={<Habit />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </BrowserRouter>

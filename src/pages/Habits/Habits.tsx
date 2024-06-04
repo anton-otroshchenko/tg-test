@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
 import {days, dayStatus} from "../../constants/constants";
 import {useOutsideClick} from "../../hooks/hooks";
+import {HabitHeader} from "../../components/HabitHeader/HabitHeader";
 
 
 type DayStatus = 'completed' | 'not_completed' | 'miss';
@@ -88,6 +89,16 @@ const Habits = () => {
     navigate('/create-habit');
   };
 
+  const navigateToHabit = (id: number) => {
+    navigate(`/habit/${id}`);
+  }
+
+  const handleDayClick = (habitId: number, dayIndex: number, event: React.MouseEvent) => {
+    event.stopPropagation();
+    setSelectedHabitId(habitId);
+    setSelectedDayId(dayIndex);
+  };
+
   return (
     <FixedLayout>
       {1
@@ -130,20 +141,12 @@ const Habits = () => {
             </List>
             <List className={styles.habitsList}>
               {habitsToDisplay.map((habit) => (
-                  <List className={styles.habitsListItem} key={habit.id}>
-                    <Text className={styles.habitTitle}>
-                      {habit.title}
-                    </Text>
-                    <Text style={{ color: "#767683", fontSize: '12px', fontWeight: '400' }}>
-                      Streak +2 | Overall 71% | 2 friends
-                    </Text>
+                  <List onClick={()=>navigateToHabit(habit.id)} className={styles.habitsListItem} key={habit.id}>
+                    <HabitHeader title={habit.title}/>
                     <List className={styles.daysWrapper}>
                       <List className={styles.daysList}>
                         {habit.days.map((day, index) => (
-                            <List className={styles.day} onClick={() => {
-                              setSelectedHabitId(habit.id)
-                              setSelectedDayId(index)
-                            }}>
+                            <List className={styles.day} onClick={(event) => handleDayClick(habit.id, index, event)}>
                               {
                                 day ?
                                     <IconButton className={clsx(styles.button, dayStatusToClassName[day as DayStatus])}>
@@ -164,7 +167,8 @@ const Habits = () => {
                       {selectedHabitId === habit.id &&
                           <div ref={ref} className={styles.statusModal}>
                             <List className={styles.statusModalItem}>
-                              <IconButton onClick={()=>{
+                              <IconButton onClick={(event)=>{
+                                event.stopPropagation();
                                 const newHabits = habitsToDisplay;
                                 newHabits[selectedHabitId-1].days[selectedDayId as number] = 'completed'
                                 setHabitsToDisplay(newHabits);
@@ -179,7 +183,8 @@ const Habits = () => {
                               }}>{dayStatus.SUCCESS}</Text>
                             </List>
                             <List className={styles.statusModalItem}>
-                              <IconButton onClick={()=>{
+                              <IconButton onClick={(event)=>{
+                                event.stopPropagation();
                                 const newHabits = habitsToDisplay;
                                 newHabits[selectedHabitId-1].days[selectedDayId as number] = 'not_completed'
                                 setHabitsToDisplay(newHabits);
@@ -194,7 +199,8 @@ const Habits = () => {
                               }}>{dayStatus.FAIL}</Text>
                             </List>
                             <List className={styles.statusModalItem}>
-                              <IconButton onClick={()=>{
+                              <IconButton onClick={(event)=>{
+                                event.stopPropagation();
                                 const newHabits = habitsToDisplay;
                                 newHabits[selectedHabitId-1].days[selectedDayId as number] = 'miss'
                                 setHabitsToDisplay(newHabits);
