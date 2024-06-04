@@ -7,18 +7,18 @@
     width: 100% !important;
 }
 
-:global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root){
+:global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root), :global(.MuiDayCalendar-weekContainer){
     width: 100% !important;
     display: flex !important;
-    justify-content: flex-start !important;
     align-items: flex-start !important;
-}
-
-:global(.MuiDayCalendar-header){
     justify-content: space-between !important;
+    text-align: start !important;
 }
 
-:global(.MuiDayCalendar-weekContainer) {
+:global(.MuiDayCalendar-monthContainer) {
     width: 100% !important;
-    justify-content: space-between !important;
+}
+
+:global(.MuiButtonBase-root) {
+   margin-right: 0 !important;
 }
