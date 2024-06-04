@@ -1,5 +1,6 @@
 .habitWrapper {
     padding: 30px 10px 0 !important;
+    height: 100%;
 }
 
 :global(.MuiDateCalendar-root){
