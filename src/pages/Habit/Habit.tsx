@@ -4,8 +4,8 @@ import { HabitHeader } from "../../components/HabitHeader/HabitHeader";
 import styles from './Habit.module.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar, PickerValidDate } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+import {DateCalendar, PickersDayProps, PickerValidDate} from '@mui/x-date-pickers';
+import dayjs, {Dayjs} from 'dayjs';
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
     if (date === null) return '';
@@ -20,6 +20,25 @@ const dayOfWeekFormatter = (date: PickerValidDate): string => {
         6: 'Sat'
     };
     return dayMap[day];
+};
+
+const CustomDay = (props: PickersDayProps<Dayjs>) => {
+    const { selected } = props;
+    return (
+        <div onClick={()=> console.log(123)}  style={{ border: selected ? '1px solid blue' : '1px solid transparent' }}>
+            <div style={{
+                color: '#000000'
+            }}>Custom Content</div>
+        </div>
+    );
+};
+
+const renderDay = (
+    day: Dayjs,
+    selectedDates: Array<Dayjs | null>,
+    pickersDayProps: PickersDayProps<Dayjs>
+) => {
+    return <CustomDay {...pickersDayProps} day={day} />;
 };
 
 const Habit = () => {
@@ -38,7 +57,14 @@ const Habit = () => {
         <FixedLayout vertical='top' className={styles.habitWrapper}>
             <HabitHeader title={habit.title} />
             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                <DateCalendar dayOfWeekFormatter={dayOfWeekFormatter} />
+                <DateCalendar
+                    dayOfWeekFormatter={dayOfWeekFormatter}
+                    slots={{
+                        //@ts-ignore
+                        day: (day: any, selectedDates: any, pickersDayProps: any) =>
+                            renderDay(day, selectedDates, pickersDayProps),
+                    }}
+                />
             </LocalizationProvider>
         </FixedLayout>
     );
