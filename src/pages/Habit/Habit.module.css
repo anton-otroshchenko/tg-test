@@ -14,6 +14,10 @@
     align-items: flex-start !important;
 }
 
+:global(.MuiDayCalendar-header){
+    justify-content: space-between !important;
+}
+
 :global(.MuiDayCalendar-weekContainer) {
     width: 100% !important;
     justify-content: space-between !important;
