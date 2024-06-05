@@ -100,7 +100,7 @@ const Habit = () => {
 
     const handleDayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, date: Dayjs) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        const pickerWidth = 150;
+        const pickerWidth = 160;
         let left = rect.left - 20;
 
         if (rect.left + pickerWidth > window.innerWidth) {
