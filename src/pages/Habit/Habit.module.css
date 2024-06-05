@@ -8,6 +8,7 @@
     width: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
+    color: #000000 !important;
 }
 
 :global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root), :global(.MuiDayCalendar-weekContainer){

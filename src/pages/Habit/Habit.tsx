@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { FixedLayout } from '@xelene/tgui';
 import { HabitHeader } from "../../components/HabitHeader/HabitHeader";
 import styles from './Habit.module.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {DateCalendar, PickersDayProps, PickerValidDate} from '@mui/x-date-pickers';
+import { DateCalendar, PickersDayProps, PickerValidDate } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
@@ -22,35 +22,57 @@ const dayOfWeekFormatter = (date: PickerValidDate): string => {
     return dayMap[day];
 };
 
-// Custom day component
-const CustomDay: React.FC<PickersDayProps<Dayjs>> = (props) => {
-    const { selected, day } = props;
+const habitDays: { id: string; date: string; status: string; }[] = [];
+const startDate = new Date('2024-06-01T06:42:52.640Z');
 
-    // Convert day to Dayjs object
+for (let i = 0; i < 30; i++) {
+    const currentDate = new Date(startDate);
+    currentDate.setDate(startDate.getDate() + i);
+
+    habitDays.push({
+        id: (i + 1).toString(),
+        date: currentDate.toISOString(),
+        status: 'not_completed',
+    });
+}
+
+const CustomDay: React.FC<PickersDayProps<Dayjs> & { currentMonth: number }> = (props) => {
+    const { day, currentMonth } = props;
     const validDay = dayjs(day);
-
-    // Check if the day is in the current month
-    const isCurrentMonth = validDay.month() === dayjs().month();
-
-    // Get day of the month or fallback to an empty string if not in the current month
+    const isCurrentMonth = validDay.month() === currentMonth;
     const dayOfMonth = isCurrentMonth && validDay.isValid() ? validDay.date() : '';
 
+    const habitDay = habitDays.find(d => dayjs(d.date).isSame(validDay, 'day'));
+    const status = habitDay ? habitDay.status : '';
+
+    let backgroundColor;
+    switch (status) {
+        case 'completed':
+            backgroundColor = '#111827';
+            break;
+        case 'not_completed':
+            backgroundColor = '#7D8391';
+            break;
+        case 'miss':
+        default:
+            backgroundColor = '#D4D9E9';
+            break;
+    }
+
     return (
-        <div onClick={() => console.log(123)} style={{ border: selected ? '1px solid blue' : '1px solid transparent' }}>
-            {isCurrentMonth &&
-                <div style={{
-                    color: '#ffffff',
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: '#111827'
-                }}>
-                    {dayOfMonth || ''}
-                </div>
-            }
+        <div onClick={() => console.log(123)} style={{ border: props.selected ? '1px solid blue' : '1px solid transparent' }}>
+            <div style={{
+                color: '#ffffff',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: `${isCurrentMonth ? backgroundColor : 'transparent'}`
+            }}>
+                {dayOfMonth || ''}
+            </div>
         </div>
     );
 };
@@ -67,14 +89,21 @@ const Habit = () => {
         days: ['completed', 'not_completed', '', '', '', '', '']
     };
 
+    const [currentMonth, setCurrentMonth] = useState(dayjs().month());
+
+    const handleMonthChange = (date: Dayjs) => {
+        setCurrentMonth(date.month());
+    };
+
     return (
         <FixedLayout vertical='top' className={styles.habitWrapper}>
             <HabitHeader title={habit.title} />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar
                     dayOfWeekFormatter={dayOfWeekFormatter}
+                    onMonthChange={handleMonthChange}
                     slots={{
-                        day: CustomDay
+                        day: (props) => <CustomDay {...props} currentMonth={currentMonth} />
                     }}
                 />
             </LocalizationProvider>
