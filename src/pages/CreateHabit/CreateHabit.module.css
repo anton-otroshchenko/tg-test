@@ -219,7 +219,7 @@ div:has(>.input) input:focus {
 .saveButton {
     width: 207px;
     background: #111827 !important;
-    margin: 0 auto 30px;
+    margin: 0 auto 20px;
 }
 
 .plusButton {
