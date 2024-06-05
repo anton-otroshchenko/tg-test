@@ -126,9 +126,13 @@ const Habit = () => {
         }
     };
 
+    const handleEdit = () => {
+        console.log('edit')
+    }
+
     return (
         <FixedLayout vertical='top' className={styles.habitWrapper}>
-            <HabitHeader title={habit.title} />
+            <HabitHeader title={habit.title} onEdit={handleEdit} />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateCalendar
                     dayOfWeekFormatter={dayOfWeekFormatter}

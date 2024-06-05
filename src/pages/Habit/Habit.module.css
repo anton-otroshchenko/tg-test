@@ -12,6 +12,7 @@
 }
 
 :global(.MuiPickersCalendarHeader-root) {
+    margin: 0 !important;
     padding: 0 !important;
 }
 
@@ -42,4 +43,8 @@
 :global(.MuiDayCalendar-weekDayLabel) {
     color: #C2C4CA !important;
     font-size: 13px !important;
+}
+
+:global(.MuiPickersArrowSwitcher-button) {
+    color: #111827 !important;
 }
