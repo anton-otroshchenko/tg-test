@@ -248,5 +248,5 @@ div:has(>.input) input:focus {
 }
 
 .actions {
-    padding: 20px 0 0 !important;
+    padding: 10px 0 0 !important;
 }
