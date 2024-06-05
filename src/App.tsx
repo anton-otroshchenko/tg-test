@@ -23,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Habits />} />
           <Route path="/create-habit" element={<CreateHabit />} />
+          <Route path="/habit/:id/edit" element={<CreateHabit />} />
           <Route path="/habit/:id" element={<Habit />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>

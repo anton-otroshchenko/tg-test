@@ -19,7 +19,7 @@ const HabitHeader: React.FC<Props> = ({title, onEdit}) => {
                 </Text>
                 {
                     onEdit &&
-                    <Text onClick={onEdit} style={{ color: "#111827", fontSize: '12px', fontWeight: '400' }}>
+                    <Text onClick={onEdit} style={{ color: "#111827", fontSize: '12px', fontWeight: '400', cursor: "pointer" }}>
                         Edit
                     </Text>
                 }

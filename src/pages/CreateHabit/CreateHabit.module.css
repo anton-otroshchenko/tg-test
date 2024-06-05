@@ -235,3 +235,18 @@ div:has(>.input) input:focus {
     width: 24px;
     height: 24px;
 }
+
+.actionWrapper {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.editIcon {
+    margin-bottom: 0 !important;
+}
+
+.actions {
+    padding-top: 40px !important;
+}

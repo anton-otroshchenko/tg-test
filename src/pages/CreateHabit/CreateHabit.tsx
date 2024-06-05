@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, FixedLayout, List, Cell, Title, Button, IconButton } from "@xelene/tgui";
+import { Input, FixedLayout, List, Cell, Title, Button, IconButton, Text } from "@xelene/tgui";
 import styles from "./CreateHabit.module.css";
 import clsx from "clsx";
 import {
@@ -15,6 +15,10 @@ import { allActiveDays, days, reminderDaysOptions } from "../../constants/consta
 import DayPicker from "./components/DayPicker";
 import { store } from '../../store/store';
 import { createHabit } from '../../store/habitsSlice';
+import {useParams} from "react-router-dom";
+
+import {ReactComponent as ArchiveIcon} from '../../assets/img/Archive.svg';
+import {ReactComponent as TrashIcon} from '../../assets/img/Trash.svg';
 
 type FormFields = "title" | "description" | "updateDays" | "reminderDays" | "isArchived" | "reminderTime" | "friends";
   // | `updateDays.${number}` | `reminderDays.${number}` | `friends.${number}` | `friends.${number}.friendTgId`; doesn't work for some reason
@@ -24,6 +28,9 @@ const CreateHabit = () => {
   const [activeDays, setActiveDays] = useState(allActiveDays);
   const [isReminderDaysPickerOpened, setIsReminderDaysPickerOpened] = useState(false);
   const [reminderDaysPicked, setReminderDaysPicked] = useState(allActiveDays);
+  const { id } = useParams() as { id: string };
+
+  const isUpdating = Boolean(id);
 
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
@@ -166,10 +173,31 @@ const CreateHabit = () => {
             <Title className={styles.title}>Share with friends</Title>
             <IconButton type='button' className={styles.plusButton}><PlusIcon /></IconButton>
           </List>
+
+          {isUpdating &&
+              <List className={styles.actions}>
+                <List className={styles.actionWrapper}>
+                  <ArchiveIcon className={styles.editIcon}/>
+                  <Text style={{
+                    color: '#000000',
+                    fontSize: '17px'
+                  }}>Archive habit</Text>
+                </List>
+                <List className={styles.actionWrapper}>
+                  <TrashIcon className={styles.editIcon}/>
+                  <Text style={{
+                    color: '#E43147',
+                    fontSize: '17px'
+                  }}>Delete habit</Text>
+                </List>
+              </List>
+          }
         </List>
 
         <Button type="submit" className={styles.saveButton}>
-          Create
+          {isUpdating ?
+          'Save':
+          'Create'}
         </Button>
       </FixedLayout>
     </form>

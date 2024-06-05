@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar, PickersDayProps, PickerValidDate } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 import StatusPicker from '../../components/StatusPicker/StatusPicker';
+import {useNavigate} from "react-router-dom";
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
     if (date === null) return '';
@@ -126,8 +127,10 @@ const Habit = () => {
         }
     };
 
+    const navigate = useNavigate();
+
     const handleEdit = () => {
-        console.log('edit')
+       navigate(`/habit/${habit.id}/edit`)
     }
 
     return (
