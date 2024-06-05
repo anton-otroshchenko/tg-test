@@ -102,7 +102,7 @@ const Habits = () => {
     setSelectedDayId(dayIndex);
 
     const rect = event.currentTarget.getBoundingClientRect();
-    const pickerWidth = 150; // Adjust this value based on the actual width of the StatusPicker
+    const pickerWidth = 160; // Adjust this value based on the actual width of the StatusPicker
     let left = rect.left;
 
     // Check if the picker will overflow the window
