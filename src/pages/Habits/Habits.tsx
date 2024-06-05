@@ -103,7 +103,7 @@ const Habits = () => {
 
     const rect = event.currentTarget.getBoundingClientRect();
     const pickerWidth = 160; // Adjust this value based on the actual width of the StatusPicker
-    let left = rect.left;
+    let left = rect.left - 20;
 
     // Check if the picker will overflow the window
     if (rect.left + pickerWidth > window.innerWidth) {
