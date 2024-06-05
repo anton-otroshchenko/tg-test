@@ -16,9 +16,10 @@ import { store } from '../../store/store';
 import { getHabits } from '../../store/habitsSlice';
 import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
-import {days, dayStatus} from "../../constants/constants";
+import {days} from "../../constants/constants";
 import {useOutsideClick} from "../../hooks/hooks";
 import {HabitHeader} from "../../components/HabitHeader/HabitHeader";
+import StatusPicker from "../../components/StatusPicker/StatusPicker";
 
 
 type DayStatus = 'completed' | 'not_completed' | 'miss';
@@ -99,6 +100,17 @@ const Habits = () => {
     setSelectedDayId(dayIndex);
   };
 
+  const handleStatusChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, status: string)=>{
+    event.stopPropagation();
+    const newHabits = habitsToDisplay;
+    if(selectedHabitId){
+      newHabits[selectedHabitId-1].days[selectedDayId as number] = status
+      setHabitsToDisplay(newHabits);
+      setSelectedDayId(null);
+      setSelectedHabitId(null);
+    }
+  }
+
   return (
     <FixedLayout>
       {1
@@ -165,56 +177,7 @@ const Habits = () => {
                         ))}
                       </List>
                       {selectedHabitId === habit.id &&
-                          <div ref={ref} className={styles.statusModal}>
-                            <List className={styles.statusModalItem}>
-                              <IconButton onClick={(event)=>{
-                                event.stopPropagation();
-                                const newHabits = habitsToDisplay;
-                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'completed'
-                                setHabitsToDisplay(newHabits);
-                                setSelectedDayId(null);
-                                setSelectedHabitId(null);
-                              }} className={clsx(styles.button, styles.checkIconBig)}>
-                                <WhiteCheck/>
-                              </IconButton>
-                              <Text style={{
-                                color: '#767683',
-                                fontSize: '11px',
-                              }}>{dayStatus.SUCCESS}</Text>
-                            </List>
-                            <List className={styles.statusModalItem}>
-                              <IconButton onClick={(event)=>{
-                                event.stopPropagation();
-                                const newHabits = habitsToDisplay;
-                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'not_completed'
-                                setHabitsToDisplay(newHabits);
-                                setSelectedDayId(null);
-                                setSelectedHabitId(null);
-                              }}  className={clsx(styles.button, styles.crossIconBig)}>
-                                <CrossIcon/>
-                              </IconButton>
-                              <Text style={{
-                                color: '#767683',
-                                fontSize: '11px',
-                              }}>{dayStatus.FAIL}</Text>
-                            </List>
-                            <List className={styles.statusModalItem}>
-                              <IconButton onClick={(event)=>{
-                                event.stopPropagation();
-                                const newHabits = habitsToDisplay;
-                                newHabits[selectedHabitId-1].days[selectedDayId as number] = 'miss'
-                                setHabitsToDisplay(newHabits);
-                                setSelectedDayId(null);
-                                setSelectedHabitId(null);
-                              }}  className={clsx(styles.button, styles.missIconBig)}>
-                                <MissIcon/>
-                              </IconButton>
-                              <Text style={{
-                                color: '#767683',
-                                fontSize: '11px',
-                              }}>{dayStatus.SKIP}</Text>
-                            </List>
-                          </div>
+                          <StatusPicker onClick={handleStatusChange} ref={ref}/>
                       }
                     </List>
                   </List>
