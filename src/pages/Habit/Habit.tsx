@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import { FixedLayout } from '@xelene/tgui';
 import { HabitHeader } from "../../components/HabitHeader/HabitHeader";
 import styles from './Habit.module.css';
@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar, PickersDayProps, PickerValidDate } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
+import StatusPicker from '../../components/StatusPicker/StatusPicker';  // Adjust import path as necessary
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
     if (date === null) return '';
@@ -36,8 +37,8 @@ for (let i = 0; i < 30; i++) {
     });
 }
 
-const CustomDay: React.FC<PickersDayProps<Dayjs> & { currentMonth: number }> = (props) => {
-    const { day, currentMonth } = props;
+const CustomDay: React.FC<PickersDayProps<Dayjs> & { currentMonth: number, onDayClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, date: Dayjs) => void }> = (props) => {
+    const { day, currentMonth, onDayClick } = props;
     const validDay = dayjs(day);
     const isCurrentMonth = validDay.month() === currentMonth;
     const dayOfMonth = isCurrentMonth && validDay.isValid() ? validDay.date() : '';
@@ -60,7 +61,7 @@ const CustomDay: React.FC<PickersDayProps<Dayjs> & { currentMonth: number }> = (
     }
 
     return (
-        <div onClick={() => console.log(123)} style={{ border: props.selected ? '1px solid blue' : '1px solid transparent' }}>
+        <div onClick={(event) => onDayClick(event, validDay)} style={{ border: props.selected ? '1px solid blue' : '1px solid transparent' }}>
             <div style={{
                 color: '#ffffff',
                 width: '32px',
@@ -90,9 +91,29 @@ const Habit = () => {
     };
 
     const [currentMonth, setCurrentMonth] = useState(dayjs().month());
+    const [selectedDay, setSelectedDay] = useState<Dayjs | null>(null);
+    const [pickerPosition, setPickerPosition] = useState<{ top: number, left: number } | null>(null);
 
     const handleMonthChange = (date: Dayjs) => {
         setCurrentMonth(date.month());
+    };
+
+    const handleDayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, date: Dayjs) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        setSelectedDay(date);
+        setPickerPosition({ top: rect.bottom + 15, left: rect.left });
+    };
+
+    const ref = useRef(null)
+
+    const handleStatusChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, status: string) => {
+        if (selectedDay) {
+            const index = habitDays.findIndex(d => dayjs(d.date).isSame(selectedDay, 'day'));
+            if (index !== -1) {
+                habitDays[index].status = status;
+                setSelectedDay(null);
+            }
+        }
     };
 
     return (
@@ -103,10 +124,15 @@ const Habit = () => {
                     dayOfWeekFormatter={dayOfWeekFormatter}
                     onMonthChange={handleMonthChange}
                     slots={{
-                        day: (props) => <CustomDay {...props} currentMonth={currentMonth} />
+                        day: (props) => <CustomDay {...props} currentMonth={currentMonth} onDayClick={handleDayClick} />
                     }}
                 />
             </LocalizationProvider>
+            {selectedDay && pickerPosition && (
+                <div style={{ position: 'absolute', top: pickerPosition.top, left: pickerPosition.left }}>
+                    <StatusPicker onClick={handleStatusChange} ref={ref} />
+                </div>
+            )}
         </FixedLayout>
     );
 };

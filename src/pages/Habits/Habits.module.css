@@ -176,9 +176,11 @@
 }
 
 .statusModal {
+    position: relative;
     display: flex;
     gap: 10px;
-    padding-left: 100px !important;
+    background: #FFFFFF !important;
+    padding: 15px !important;
 }
 
 .statusModalItem {
