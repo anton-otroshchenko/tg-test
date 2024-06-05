@@ -17,7 +17,6 @@ import { getHabits } from '../../store/habitsSlice';
 import { useNavigate } from 'react-router-dom';
 import clsx from "clsx";
 import {days} from "../../constants/constants";
-import {useOutsideClick} from "../../hooks/hooks";
 import {HabitHeader} from "../../components/HabitHeader/HabitHeader";
 import StatusPicker from "../../components/StatusPicker/StatusPicker";
 
@@ -42,9 +41,9 @@ const Habits = () => {
 
   const [selectedHabitId, setSelectedHabitId] = useState<number | null>(null);
   const [selectedDayId, setSelectedDayId] = useState<number | null>(null);
-  const ref = useOutsideClick(() => {
+  const handleClickOutside = () => {
     setSelectedHabitId(null);
-  });
+  };
 
   console.log(selectedDayId)
 
@@ -177,7 +176,7 @@ const Habits = () => {
                         ))}
                       </List>
                       {selectedHabitId === habit.id &&
-                          <StatusPicker onClick={handleStatusChange} ref={ref}/>
+                          <StatusPicker onClick={handleStatusChange} onClickOutside={handleClickOutside}/>
                       }
                     </List>
                   </List>

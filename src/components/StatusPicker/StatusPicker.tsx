@@ -7,16 +7,20 @@ import {dayStatus} from "../../constants/constants";
 import { ReactComponent as WhiteCheck } from '../../assets/img/check-white.svg';
 import { ReactComponent as CrossIcon } from '../../assets/img/cross.svg';
 import { ReactComponent as MissIcon } from '../../assets/img/miss.svg';
+import {useOutsideClick} from "../../hooks/hooks";
 
 type Props = {
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent> , status: string) => void
-    ref: React.Ref<HTMLDivElement>;
+    onClickOutside: () => void;
 }
 
 const StatusPicker: React.FC<Props> = ({
     onClick,
-    ref
+    onClickOutside
                                        }) => {
+
+    const ref = useOutsideClick(onClickOutside)
+
     return (
         <div ref={ref} className={styles.statusModal}>
             <List className={styles.statusModalItem}>

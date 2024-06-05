@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { FixedLayout } from '@xelene/tgui';
 import { HabitHeader } from "../../components/HabitHeader/HabitHeader";
 import styles from './Habit.module.css';
@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar, PickersDayProps, PickerValidDate } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
-import StatusPicker from '../../components/StatusPicker/StatusPicker';  // Adjust import path as necessary
+import StatusPicker from '../../components/StatusPicker/StatusPicker';
 
 const dayOfWeekFormatter = (date: PickerValidDate): string => {
     if (date === null) return '';
@@ -111,7 +111,10 @@ const Habit = () => {
         setPickerPosition({ top: rect.bottom + 15, left });
     };
 
-    const ref = useRef(null)
+    const handleClickOutside = () => {
+        setSelectedDay(null);
+        setPickerPosition(null);
+    };
 
     const handleStatusChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, status: string) => {
         if (selectedDay) {
@@ -137,7 +140,7 @@ const Habit = () => {
             </LocalizationProvider>
             {selectedDay && pickerPosition && (
                 <div style={{ position: 'absolute', top: pickerPosition.top, left: pickerPosition.left }}>
-                    <StatusPicker onClick={handleStatusChange} ref={ref} />
+                    <StatusPicker onClick={handleStatusChange} onClickOutside={handleClickOutside} />
                 </div>
             )}
         </FixedLayout>

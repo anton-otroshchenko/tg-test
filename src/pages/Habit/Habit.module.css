@@ -11,6 +11,10 @@
     color: #000000 !important;
 }
 
+:global(.MuiPickersCalendarHeader-root) {
+    padding: 0 !important;
+}
+
 :global(.MuiDayCalendar-header), :global(.MuiPickersSlideTransition-root), :global(.MuiDayCalendar-weekContainer){
     width: 100% !important;
     display: flex !important;
@@ -33,4 +37,9 @@
 :global(.MuiPickersFadeTransitionGroup-root), :global(.MuiPickersFadeTransitionGroup-root > div), :global(.MuiPickersFadeTransitionGroup-root > div > div),
 :global(.MuiPickersSlideTransition-root) {
     height: 100% !important;
+}
+
+:global(.MuiDayCalendar-weekDayLabel) {
+    color: #C2C4CA !important;
+    font-size: 13px !important;
 }
