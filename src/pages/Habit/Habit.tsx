@@ -100,12 +100,11 @@ const Habit = () => {
 
     const handleDayClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, date: Dayjs) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        const pickerWidth = 150; // Adjust this value based on the actual width of the StatusPicker
-        let left = rect.left;
+        const pickerWidth = 150;
+        let left = rect.left - 20;
 
-        // Check if the picker will overflow the window
         if (rect.left + pickerWidth > window.innerWidth) {
-            left = window.innerWidth - pickerWidth - 10; // Adjust the value for padding/margin
+            left = window.innerWidth - pickerWidth - 10;
         }
 
         setSelectedDay(date);
